@@ -40,6 +40,8 @@ defmodule ShopWeb.Router do
   scope "/api", ShopWeb do
     pipe_through(:api)
     get("/products", ApiController, :index)
+
+    resources("/promotions", PromotionController, except: [:new, :edit])
   end
 
   # Other scopes may use custom stacks.

@@ -11,8 +11,6 @@ defmodule ShopWeb.ProductLive.Index do
       |> Enum.map(fn prod -> {prod.id, 0} end)
       |> Map.new()
 
-    dbg(likes)
-
     socket =
       socket
       |> assign(:products, products)
@@ -43,11 +41,54 @@ defmodule ShopWeb.ProductLive.Index do
 
   def render(assigns) do
     ~H"""
-    <h1>This is the product live page</h1>
-    <div :for={product <- @products}>
-      <p>{product.name} - Likes {@likes[product.id]}</p>
-      <.icon name="hero-hand-thumb-down-mini" class = "size-4 cursor-pointer" phx-click="dislike" phx-value-id = {product.id}/>
-      <.icon name="hero-hand-thumb-up-mini" class = "size-4 cursor-pointer" phx-click="like" phx-value-id = {product.id} />
+    <div class="max-w-3xl mx-auto p-6">
+      <h1 class="text-2xl font-bold mb-6 text-white">
+        Product Likes
+      </h1>
+
+      <div class="space-y-4">
+        <div
+          :for={product <- @products}
+          class="flex items-center justify-between p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow"
+        >
+          <div>
+            <p class="text-lg font-semibold text-gray-900">
+              <%= product.name %>
+            </p>
+            <p class="text-sm text-gray-500">
+              Likes: <%= @likes[product.id] %>
+            </p>
+          </div>
+
+          <div class="flex items-center space-x-3">
+            <.icon
+              name="hero-hand-thumb-down-mini"
+              class="w-6 h-6 text-red-500 hover:text-red-600 cursor-pointer transition-colors"
+              phx-click="dislike"
+              phx-value-id={product.id}
+            />
+            <.icon
+              name="hero-hand-thumb-up-mini"
+              class="w-6 h-6 text-green-500 hover:text-green-600 cursor-pointer transition-colors"
+              phx-click="like"
+              phx-value-id={product.id}
+            />
+          </div>
+        </div>
+
+        <div
+          class="flex items-center justify-between p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow"
+        >
+        <div>
+            <.link navigate = {~p"/products-live/new"} class = "text-lg font-semibold text-gray-900">
+            Add Product
+            </.link>
+          </div>
+        </div>
+
+      </div>
+
+
     </div>
     """
   end

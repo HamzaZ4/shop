@@ -8,21 +8,21 @@ defmodule ShopWeb.UserLive.Registration do
   def render(assigns) do
     ~H"""
     <Layouts.app flash={@flash} current_scope={@current_scope}>
-      <div class="mx-auto max-w-sm">
+      <div class="mx-auto max-w-sm text-gray-700">
         <div class="text-center">
-          <.header>
+          <.header class="text-gray-700">
             Register for an account
             <:subtitle>
-              Already registered?
-              <.link navigate={~p"/users/log-in"} class="font-semibold text-brand hover:underline">
+            <span class = "text-gray-700"> Already registered?</span>
+              <.link navigate={~p"/users/log-in"} class="font-semibold text-brand text-gray-700 hover:underline">
                 Log in
               </.link>
-              to your account now.
+            <span class = "text-gray-700"> to your account now</span>
             </:subtitle>
           </.header>
         </div>
 
-        <.form for={@form} id="registration_form" phx-submit="save" phx-change="validate">
+        <.form for={@form} id="registration_form" phx-submit="save" phx-change="validate" class="text-gray-700">
           <.input
             field={@form[:email]}
             type="email"

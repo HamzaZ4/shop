@@ -23,13 +23,16 @@ defmodule Shop.Products.Product do
   end
 
   def format_name(changeset) do
-    name = changeset.changes.name |> String.trim()
-    put_change(changeset, :name, name)
+    case get_change(changeset, :name) do
+      nil -> changeset
+      name -> put_change(changeset, :name, String.trim(name))
+    end
   end
 
   def generate_slug(changeset) do
-    slug = changeset.changes.name |> String.downcase() |> String.replace(" ", "-")
-
-    put_change(changeset, :slug, slug)
+    case get_change(changeset, :name) do
+      nil -> changeset
+      name -> put_change(changeset, :name, String.trim(name))
+    end
   end
 end

@@ -40,6 +40,10 @@ defmodule ShopWeb.Router do
     get("/products", ProductController, :index)
 
     live("/products-live", ProductLive.Index)
+
+    live("/products-live/new", ProductLive.New, :new)
+
+    live("/products-live/:id/edit", ProductLive.Index, :new)
   end
 
   scope "/api", ShopWeb do

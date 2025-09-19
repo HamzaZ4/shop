@@ -38,12 +38,6 @@ defmodule ShopWeb.Router do
     get("/products/:slug", ProductController, :show)
 
     get("/products", ProductController, :index)
-
-    live("/products-live", ProductLive.Index)
-
-    live("/products-live/new", ProductLive.New, :new)
-
-    live("/products-live/:id/edit", ProductLive.Index, :new)
   end
 
   scope "/api", ShopWeb do
@@ -87,6 +81,12 @@ defmodule ShopWeb.Router do
     end
 
     post("/users/update-password", UserSessionController, :update_password)
+
+    live("/products-live", ProductLive.Index)
+
+    live("/products-live/new", ProductLive.New, :new)
+
+    live("/products-live/:id/edit", ProductLive.Index, :new)
   end
 
   scope "/", ShopWeb do
